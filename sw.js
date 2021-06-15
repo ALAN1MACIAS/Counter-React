@@ -27,11 +27,11 @@ self.addEventListener("activate", (e) => {
       return Promise.all(cachesNames.map(cachesNames => {
         return cacheWhitelist.indexOf(cachesNames) === -1 && caches.delete(cachesNames)
       })) // Resibe un array, puede quitar varias promesas o resolver hambas promesas
-    }).then( () => self.clients.claim()) // Da todas las claves en caso de que se tenga mas de un cache instalado
+    }).then( () => self.clients.claim()) // Gives all the keys in case you have more than one cache installed.
   ); // Wait for something to run
 });
 
-self.addEventListener("fetch", (e) => { // Busca nuevas versiones de los archivos y retorna o captura nuevos elementos
+self.addEventListener("fetch", (e) => { // Searches for new versions of the files and returns or captures new elements.
   e.respondWith(
     caches.match(e.request).then((res) => {
       if (res) {
